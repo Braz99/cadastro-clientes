@@ -1,3 +1,5 @@
+import ButtonApp from "../components/ButtonApp";
+import FormClient from "../components/FormClient";
 import Layout from "../components/Layout";
 import TableClients from "../components/TableCients";
 import Client from "../core/Client";
@@ -42,7 +44,8 @@ export default function Home() {
   ];
 
   function selectClient(client: Client) {
-    console.log(client.name);
+    console.log(client);
+    return client;
   }
 
   function removeClient(client: Client) {
@@ -56,11 +59,16 @@ export default function Home() {
     bg-gradient-to-r from-blue-500 to-purple-500`}
     >
       <Layout title="Cadastro Simples">
+        <div className={`flex justify-end`}>
+          <ButtonApp color="blue">Cadastrar Cliente</ButtonApp>
+        </div>
         <TableClients
           clients={clients}
           clientSelected={selectClient}
           clientRemoved={removeClient}
         ></TableClients>
+
+        <FormClient client={clients[0]} />
       </Layout>
     </div>
   );
