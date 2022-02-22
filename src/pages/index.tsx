@@ -36,7 +36,7 @@ export default function Home() {
   //     Math.trunc(Math.random() * 1000 + Math.random() * 500) + letter?.value
   //   );
   // }
-
+  let [clientSelected, setClientSelected] = useState<Client>(Client.empty());
   let [visible, setVisible] = useState<"formulary" | "table">("table");
 
   let clients = [
@@ -47,12 +47,17 @@ export default function Home() {
   ];
 
   function selectClient(client: Client) {
-    console.log(client);
-    return client;
+    setClientSelected(client);
+    setVisible("formulary");
   }
 
   function removeClient(client: Client) {
     console.log(client.name, "removed");
+  }
+
+  function newClient() {
+    setClientSelected(Client.empty());
+    setVisible("formulary");
   }
 
   function saveClient(client: Client) {
@@ -69,7 +74,7 @@ export default function Home() {
         {visible === "table" ? (
           <>
             <div className={`flex justify-end`}>
-              <ButtonApp onClick={() => setVisible("formulary")} color="blue">
+              <ButtonApp onClick={newClient} color="blue">
                 Cadastrar Cliente
               </ButtonApp>
             </div>
@@ -83,7 +88,7 @@ export default function Home() {
           <FormClient
             cancel={() => setVisible("table")}
             clientChange={saveClient}
-            client={clients[0]}
+            client={clientSelected}
           />
         )}
       </Layout>
