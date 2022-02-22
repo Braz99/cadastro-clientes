@@ -1,3 +1,4 @@
+import { useState } from "react";
 import ButtonApp from "../components/ButtonApp";
 import FormClient from "../components/FormClient";
 import Layout from "../components/Layout";
@@ -36,11 +37,13 @@ export default function Home() {
   //   );
   // }
 
+  let [visible, setVisible] = useState<"formulary" | "table">("table");
+
   let clients = [
-    new Client(1, "Ana", 17),
-    new Client(2, "Beatriz", 19),
-    new Client(3, "Joaquim", 20),
-    new Client(4, "Manuela", 21),
+    new Client("Ana", 17, 1),
+    new Client("Beatriz", 19, 2),
+    new Client("Joaquim", 20, 3),
+    new Client("Manuela", 21, 4),
   ];
 
   function selectClient(client: Client) {
@@ -52,6 +55,10 @@ export default function Home() {
     console.log(client.name, "removed");
   }
 
+  function saveClient(client: Client) {
+    console.log(client);
+  }
+
   return (
     <div
       className={`flex h-screen w-screen  
@@ -59,16 +66,26 @@ export default function Home() {
     bg-gradient-to-r from-blue-500 to-purple-500`}
     >
       <Layout title="Cadastro Simples">
-        <div className={`flex justify-end`}>
-          <ButtonApp color="blue">Cadastrar Cliente</ButtonApp>
-        </div>
-        <TableClients
-          clients={clients}
-          clientSelected={selectClient}
-          clientRemoved={removeClient}
-        ></TableClients>
-
-        <FormClient client={clients[0]} />
+        {visible === "table" ? (
+          <>
+            <div className={`flex justify-end`}>
+              <ButtonApp onClick={() => setVisible("formulary")} color="blue">
+                Cadastrar Cliente
+              </ButtonApp>
+            </div>
+            <TableClients
+              clients={clients}
+              clientSelected={selectClient}
+              clientRemoved={removeClient}
+            ></TableClients>
+          </>
+        ) : (
+          <FormClient
+            cancel={() => setVisible("table")}
+            clientChange={saveClient}
+            client={clients[0]}
+          />
+        )}
       </Layout>
     </div>
   );

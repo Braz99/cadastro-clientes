@@ -9,7 +9,7 @@ interface InputProps {
 export default function InputData(props: InputProps) {
   return (
     <div className="flex flex-col">
-      <label className="m-4">{props.text}</label>
+      <label className="mb-4 mt-2">{props.text}</label>
       <input
         onChange={(e) => props.valueChange?.(e.target.value)}
         type={props.type ?? "text"}

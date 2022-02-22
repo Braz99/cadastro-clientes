@@ -1,13 +1,15 @@
 interface ButtonProps {
   children: string;
   color?: "blue" | "gray" | "red";
-  className?: string
+  className?: string;
+  onClick?: () => void;
 }
 
 export default function ButtonApp(props: ButtonProps) {
   let color = props.color ?? "gray";
   return (
     <button
+      onClick={props.onClick}
       className={`
     p-4 
     text-white 
