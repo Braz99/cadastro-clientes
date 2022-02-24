@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import ClientCollection from "../backend/db/ClientsCollection";
 import ButtonApp from "../components/ButtonApp";
 import FormClient from "../components/FormClient";
 import Layout from "../components/Layout";
 import TableClients from "../components/TableCients";
 import Client from "../core/Client";
+import ClientsRepository from "../core/ClientsRepository";
 
 // interface items {
 //   index: number;
@@ -38,13 +40,19 @@ export default function Home() {
   // }
   let [clientSelected, setClientSelected] = useState<Client>(Client.empty());
   let [visible, setVisible] = useState<"formulary" | "table">("table");
+  let [clients, setClients] = useState<Client[]>([]);
 
-  let clients = [
-    new Client("Ana", 17, 1),
-    new Client("Beatriz", 19, 2),
-    new Client("Joaquim", 20, 3),
-    new Client("Manuela", 21, 4),
-  ];
+  let repo: ClientsRepository = new ClientCollection();
+  // let clients = [
+  //   new Client("Ana", 17, 1),
+  //   new Client("Beatriz", 19, 2),
+  //   new Client("Joaquim", 20, 3),
+  //   new Client("Manuela", 21, 4),
+  // ];
+
+  useEffect(() => {
+    repo.showAllClients().then(setClients);
+  }, []);
 
   function selectClient(client: Client) {
     setClientSelected(client);
