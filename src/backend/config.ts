@@ -1,20 +1,15 @@
-import * as firebase from "firebase/app";
+import { getApps, initializeApp, getApp } from "firebase/app";
 
-import {
-  QueryDocumentSnapshot,
-  getDoc,
-  setDoc,
-  updateDoc,
-  deleteDoc,
-  getFirestore,
-} from "firebase/firestore";
+const app = () => {
+  if (getApps().length <= 0) {
+    let initialize = initializeApp({
+      apiKey: process.env.NEXT_PUBLIC_FIREBASE_APP_KEY,
+      authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+      projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+    });
 
-if (firebase.getApps().length <= 0) {
-  firebase.initializeApp({
-    apiKey: process.env.NEXT_PUBLIC_FIREBASE_APP_KEY,
-    authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
-    projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
-  });
-}
+    return initialize;
+  }
+};
 
-export default firebase;
+export default app;

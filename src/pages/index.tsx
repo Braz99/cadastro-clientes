@@ -1,49 +1,20 @@
-import { useEffect, useState } from "react";
-import ClientCollection from "../backend/db/ClientsCollection";
 import ButtonApp from "../components/ButtonApp";
 import FormClient from "../components/FormClient";
 import Layout from "../components/Layout";
-import TableClients from "../components/TableCients";
-import Client from "../core/Client";
-import ClientsRepository from "../core/ClientsRepository";
+import TableClients from "../components/TableClients";
+import useClients from "../hooks/useClients";
 
 export default function Home() {
-  let [clientSelected, setClientSelected] = useState<Client>(Client.empty());
-  let [visible, setVisible] = useState<"formulary" | "table">("table");
-  let [clients, setClients] = useState<Client[]>([]);
-
-  let repo: ClientsRepository = new ClientCollection();
-
-  useEffect(() => {
-    showClients;
-  }, []);
-
-  function showClients() {
-    repo.showAllClients().then((clients) => {
-      setClients(clients);
-      setVisible("table");
-    });
-  }
-
-  function selectClient(client: Client) {
-    setClientSelected(client);
-    setVisible("formulary");
-  }
-
-  async function removeClient(client: Client) {
-    await repo.removeClient(client);
-    showClients();
-  }
-
-  function newClient() {
-    setClientSelected(Client.empty());
-    setVisible("formulary");
-  }
-
-  async function saveClient(client: Client) {
-    await repo.saveClient(client);
-    showClients();
-  }
+  const {
+    addClient,
+    saveClient,
+    removeClient,
+    selectClient,
+    clientSelected,
+    clients,
+    tableVisible,
+    showTable,
+  } = useClients();
 
   return (
     <div
@@ -52,10 +23,10 @@ export default function Home() {
     bg-gradient-to-r from-blue-500 to-purple-500`}
     >
       <Layout title="Cadastro Simples">
-        {visible === "table" ? (
+        {tableVisible ? (
           <>
             <div className={`flex justify-end`}>
-              <ButtonApp onClick={newClient} color="blue">
+              <ButtonApp onClick={addClient} color="blue">
                 Cadastrar Cliente
               </ButtonApp>
             </div>
@@ -67,7 +38,7 @@ export default function Home() {
           </>
         ) : (
           <FormClient
-            cancel={() => setVisible("table")}
+            cancel={showTable}
             clientChange={saveClient}
             client={clientSelected}
           />
