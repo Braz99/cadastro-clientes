@@ -1,3 +1,4 @@
+import Head from "next/head";
 import ButtonApp from "../components/ButtonApp";
 import FormClient from "../components/FormClient";
 import Layout from "../components/Layout";

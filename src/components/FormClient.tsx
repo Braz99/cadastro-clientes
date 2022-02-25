@@ -26,7 +26,7 @@ export default function FormClient(props: FormProps) {
           color="blue"
           className="mr-10 w-40"
         >
-          {id ? "alterar" : "salvar"}
+          {id ? "Alterar" : "Salvar"}
         </ButtonApp>
         <ButtonApp className="w-40" onClick={props.cancel}>
           Cancelar
