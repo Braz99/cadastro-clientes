@@ -12,9 +12,10 @@
 
 ## Sobre
 
-Link: [Cadastro Clientes Vercel](https://cadastro-clientes-simples.vercel.app/)
+Este site foi feito com base no tutorial feito pela Cod3r Cursos no youtube: [Vídeo](https://www.youtube.com/watch?v=HJN5rX-3SDM). Como a versão atual do firebase é diferente da mostrada no vídeo tive que refazer a parte da configuração e integração, aprendendo mais sobre o firebase no processo. O projeto consiste em registrar dados de um cliente, dando a possibilidade de alterar os dados ou excluí-los. Tudo isso é registrado usando o firestore.  
 
-Este site foi feito com base no tutorial feito pela Cod3r Cursos no youtube: [Vídeo](https://www.youtube.com/watch?v=HJN5rX-3SDM). Como a versão atual do firebase é diferente da mostrada no vídeo tive que refazer a parte da configuração e integração, aprendendo mais sobre o firebase no processo. O projeto consiste em registrar dados de um cliente, dando a possibilidade de alterar os dados ou excluí-los. Tudo isso é registrado usando o firestore. 
+
+Link: [Cadastro Clientes Vercel](https://cadastro-clientes-simples.vercel.app/) - Somente uma demonstração, não cadastre clientes, pois resultará em erro por não ter o firestore configurado.
 
 ### Tecnologias
 
